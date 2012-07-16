@@ -1,6 +1,7 @@
 #pragma once
 #include "VCommonDefines.h"
 #include "boost/cstdint.hpp"
+#include <stdio>
 
 #define USE_NEW_IMPLEMENT
 namespace boost

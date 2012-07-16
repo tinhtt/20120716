@@ -2,6 +2,7 @@
 #include "VCommonDefines.h"
 #include "boost/cstdint.hpp"
 #include <stdio>
+#include <iostream>
 
 #define USE_NEW_IMPLEMENT
 namespace boost

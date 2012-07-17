@@ -19,6 +19,7 @@
 //#include "google/dense_hash_set"
 //#include "google/dense_hash_map"
 
+#include "boost/cstdint.hpp"
 #include "boost/date_time.hpp"
 #include "boost/unordered_map.hpp"
 #include "boost/asio.hpp"
@@ -51,7 +52,7 @@ typedef	double							VDouble64;
 typedef boost::posix_time::ptime 		VTime;
 typedef boost::asio::io_service			VBoostService;
 typedef boost::system::error_code		VBoostError;
-typedef boost::asio::ip::tcp			VTCP;
+typedef boost::asio::ip::tcp			VTcp;
 typedef boost::asio::ip::tcp::resolver	VResolver;
 typedef boost::asio::ip::tcp::endpoint  VEndPoint;
 typedef boost::asio::ip::tcp::socket	VTcpSocket;

@@ -1,7 +1,5 @@
 #pragma once
-#include "VAllocatorHandler.h"
-#include "VNetWorkFwd.h"
-#include "VCommonDefines.h"
+#include "../VCommon/VCommonDefines.h"
 
 class VUser
 {	
@@ -11,8 +9,8 @@ public:
 		UNKNOW,
 		LOGIN,
 		LOGOUT,
-		KICK,
 	};
+
 public:
 	VUser(void);
 	virtual ~VUser(void);

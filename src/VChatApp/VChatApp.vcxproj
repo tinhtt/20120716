@@ -66,7 +66,7 @@
     <Link>
       <AdditionalDependencies>mysqlcppconn.lib;VNetwork.lib;tinyxml.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\Bin\Chat.exe</OutputFile>
-      <AdditionalLibraryDirectories>..\..\boost_1_50_0\stage\lib;..\Bin\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\binaries;..\Bin\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>

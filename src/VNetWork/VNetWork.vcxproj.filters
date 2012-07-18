@@ -25,10 +25,10 @@
     <ClInclude Include="VUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VAsyncServer.h">
+    <ClInclude Include="VNetWorkFwd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VNetWorkFwd.h">
+    <ClInclude Include="VAsyncServer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 #include "VUser.h"
 #include "../VCommon/crc32.h"
-#include "VAsyncServer.h"
+#include "VAsyncServer.hpp"
 
 VString VUser::GetSessionAddress(VSessionRef refSession)
 {

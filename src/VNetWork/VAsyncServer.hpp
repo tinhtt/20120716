@@ -1,5 +1,4 @@
 #pragma once
-#include "VNetWorkFwd.h"
 #include "VUser.h"
 
 namespace boost
@@ -16,10 +15,6 @@ namespace boost
 		};
 #pragma pack(pop)
 
-		class session;
-		typedef session*					session_ptr;
-		typedef boost::shared_ptr<session>	session_ref;
-		
 		class handler_allocator
 			: private boost::noncopyable
 		{

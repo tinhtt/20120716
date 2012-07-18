@@ -654,7 +654,7 @@
     <ClCompile Include="VUser.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="VAsyncServer.h" />
+    <ClInclude Include="VAsyncServer.hpp" />
     <ClInclude Include="VNetWorkFwd.h" />
     <ClInclude Include="VNetWorkManager.h" />
     <ClInclude Include="VUser.h" />

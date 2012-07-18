@@ -8,6 +8,9 @@ namespace boost
 		class session;
 		class async_server;
 		struct Header;
+
+		typedef session*					session_ptr;
+		typedef boost::shared_ptr<session>	session_ref;
 	};
 };
 

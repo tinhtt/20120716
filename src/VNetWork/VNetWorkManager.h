@@ -1,26 +1,23 @@
 #pragma once
-#include "boost/thread.hpp"
-#include "boost/smart_ptr.hpp"
-#include "VNetWorkFwd.h"
+#include "VAsyncServer.h"
+
 class VNetWorkManager
 {
 private:
-	VNetWorkManager(void)
-	{
-	}
+	VNetWorkManager(void) {}
+	~VNetWorkManager(void) {}
 
-	virtual ~VNetWorkManager(void)
-	{
-	}
 public:
 	static VNetWorkManager &Instance() 
 	{ 
-		static VNetWorkManager instance; 
+		static VNetWorkManager instance;
 		return instance; 
 	}
-	void Start(size_t max_session, size_t recycled_session, unsigned short port);
+
+	void Start(const size_t& max_session, const size_t& recycled_session, const unsigned short& port);
 	void Stop();
-private:	
-	AsyncServerRef m_Server;
+
+private:
+	VAsyncServerRef m_Server;
 };
 

@@ -655,9 +655,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VAsyncServer.h" />
-    <ClInclude Include="VInternalNetwork.h" />
-    <ClInclude Include="VInternalPacket.h" />
-    <ClInclude Include="VNetwork.h" />
+    <ClInclude Include="VNetWorkFwd.h" />
     <ClInclude Include="VNetWorkManager.h" />
     <ClInclude Include="VUser.h" />
   </ItemGroup>

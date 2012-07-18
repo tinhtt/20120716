@@ -1,67 +1,110 @@
-#include "VNetwork.h"
 #include "VUser.h"
-#include "VUtility.h"
-#include "AsyncServer.h"
-VUser::VUser(void) : m_State(UNKNOW), m_nSeq(0)
+#include "../VCommon/crc32.h"
+#include "VAsyncServer.h"
+
+VString VUser::GetSessionAddress(VSessionRef refSession)
 {
+	static const VString emptyAddr = "0.0.0.0";
+	return refSession ? refSession->get_address() : emptyAddr;
 }
-VUser::~VUser(void)
+
+VString VUser::GetSessionAddressEx(VSessionPtr pSession)
 {
+	static const VString emptyAddr = "0.0.0.0";
+	return pSession ? pSession->get_address() : emptyAddr;
 }
-void VUser::SendData(const ConstBuffer &header,const ConstBuffer &buff)
+
+void VUser::SendData(VSessionPtr pSession, const VConstBuffer &header,const VConstBuffer &buff)
 {
-	//VCommon::ScopedLock lock(m_mutex);
-	if( SessionRef pSession = m_Session.lock() )
+	if (pSession)
 		pSession->send_packet(header, buff);
-}
-void VUser::SendBufferPtr(const VSimpleBufferPtr &buffer)
-{
-	if( SessionRef pSession = m_Session.lock() )
-		pSession->sendbuffer(buffer);
-}
-VString VUser::GetSessionAddress(SessionRef session)
-{
-	static const VString emptyAddr = "0.0.0.0";
-	return session ? session->get_address() : emptyAddr;
-}
-VString VUser::GetSessionAddressEx(SessionPtr session)
-{
-	static const VString emptyAddr = "0.0.0.0";
-	return session ? session->get_address() : emptyAddr;
-}
-void VUser::SendData(SessionPtr session, const ConstBuffer &header,const ConstBuffer &buff)
-{
-	if( session )
-		session->send_packet(header, buff);
 
 }
-void VUser::SetSession(SessionPtr session)
-{
-	VCommon::ScopedLock lock(m_mutex);
-	SetSessionInternal(session);
+
+VUser::VUser(void)
+	: m_State(UNKNOW)
+	, m_nSeq(0)
+{}
+
+VUser::~VUser(void)
+{}
+
+VSessionRef VUser::GetSession() {		
+	return m_Session.lock();
 }
-void VUser::SetSessionEx(SessionPtr session, UserRef user)
+
+void VUser::CloseSession() {
+	SetSession(0);
+}
+
+void VUser::SetState(const STATE &newState)
 {
-	//VCommon::ScopedLock lock(m_mutex);	
-	if( session )
+	vcommon::ScopedLock lock(m_Mutex);
+	m_State = newState;
+	if (m_State == LOGOUT)
+		m_Session.reset();
+}
+
+VUser::STATE VUser::GetState()
+{
+	vcommon::ScopedLock lock(m_Mutex);
+	return m_State;
+}
+
+//VBool VUser::CanProcessPacket() {
+//	return CanReceivePacket();
+//}
+//
+//VBool VUser::CanReceivePacket() {
+//	vcommon::ScopedLock lock(m_Mutex);		
+//	return (m_State == LOGIN) ? true :false;
+//}
+
+void VUser::Reset()
+{
+	vcommon::ScopedLock lock(m_Mutex);		
+	m_State = UNKNOW;
+}
+
+void VUser::SendData(const VConstBuffer &header,const VConstBuffer &buff)
+{
+	if (VSessionRef refSession = m_Session.lock())
+		refSession->send_packet(header, buff);
+}
+
+void VUser::SendBuffer(const VSimpleBufferRef &buffer)
+{
+	if (VSessionRef refSession = m_Session.lock())
+		refSession->send_buffer(buffer);
+}
+
+void VUser::SetSession(VSessionPtr pSession)
+{
+	vcommon::ScopedLock lock(m_Mutex);
+	SetSessionInternal(pSession);
+}
+
+void VUser::SetSessionExternal(VSessionPtr pSession, VUserRef refUser)
+{
+	if (pSession)
 	{
-		m_Session = session->shared_from_this();
-		session->SetUser(user);
+		m_Session = pSession->shared_from_this();
+		pSession->set_user(refUser);
 	}
 	else
 		m_Session.reset();
 }
-void VUser::SetSessionInternal(SessionPtr session)
+
+void VUser::SetSessionInternal(VSessionPtr pSession)
 {	
-	if( session )
-		m_Session = session->shared_from_this();	
+	if (pSession)
+		m_Session = pSession->shared_from_this();	
 	else
 		m_Session.reset();
-
 }
-void VUser::InitSecKey(const VUInt32 &nKey)
+
+void VUser::InitSecretKey(const VUInt32 &nKey)
 {
-	//VCommon::ScopedLock lock(m_mutex);
 	m_nKey = nKey;
 	m_nSeq = 0;
 	for (VUInt32 n = 0; n < 256; ++n) 
@@ -75,12 +118,12 @@ void VUser::InitSecKey(const VUInt32 &nKey)
 		m_CrcTable[n] = c;
 	}
 }
+
 VBool VUser::CheckSecurity(const VUInt32 &nCRC, const VUInt32 & nSeq, const void *pBuff, const VUInt32& nLen)
 {
-	//VCommon::ScopedLock lock(m_mutex);
-	if( nSeq == m_nSeq )
+	if (nSeq == m_nSeq)
 	{
-		if( nLen == 0 || nCRC == GetCRC(m_nKey, pBuff, nLen, m_CrcTable) )
+		if (nLen == 0 || nCRC == GetCRC(m_nKey, pBuff, nLen, m_CrcTable))
 		{
 			++m_nSeq;
 			return VTrue;

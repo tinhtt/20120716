@@ -79,7 +79,7 @@ namespace vchat
 			return;
 		//std::for_each(m_Users.begin(), m_Users.end(), boost::bind(&VChatUser::SendPacket, _1, nPacketType, pPacket, nLen));
 		VReadLock lock(m_Mutex);
-		std::for_each(m_Users.begin(), m_Users.end(), boost::bind(&VChatUser::SendBufferPtr, _1, buffer));
+		std::for_each(m_Users.begin(), m_Users.end(), boost::bind(&VChatUser::SendBuffer, _1, buffer));
 	}
 
 	VBool VChatRoom::GetCriteria(MMCriteria &criteria)

@@ -289,12 +289,12 @@ namespace vcommon
 
 		void deallocate(pointer _Ptr, size_type _Count)
 		{
-			AllocateManager::Instance().DeAllocate((void*)_Ptr, (UINT_32)_Count * sizeof(_Ty));
+			AllocateManager::Instance().DeAllocate((void*)_Ptr, (VUInt32)_Count * sizeof(_Ty));
 		}
 
 		pointer allocate(size_type _Count, const void* = 0)
 		{
-			return (pointer)AllocateManager::Instance().Allocate((UINT_32)_Count * sizeof(_Ty));
+			return (pointer)AllocateManager::Instance().Allocate((VUInt32)_Count * sizeof(_Ty));
 		}
 
 		void construct(pointer _Ptr, const _Ty& _Val)
@@ -344,17 +344,17 @@ namespace vcommon
 	template<typename T>
 	class CircularBuffer : public boost::circular_buffer< T, ContainerAlloc<T> > {};
 	
-	template<typename Key>
-	class SparseHashSet : public google::sparse_hash_set<Key, SPARSEHASH_HASH<Key>, std::equal_to<Key>, ContainerAlloc<Key> > {};
-	
-	template<typename Key>
-	class DenseHashSet : public google::dense_hash_set<Key, SPARSEHASH_HASH<Key>, std::equal_to<Key>, ContainerAlloc<Key> > {};
-	
-	template<typename Key, typename V>
-	class SparseHashMap : public google::sparse_hash_map <Key, V, SPARSEHASH_HASH<Key>, std::equal_to<Key>, ContainerAlloc<std::pair<Key, V> > > {};
-	
-	template<typename Key, typename V>
-	class DenseHashMap : public google::dense_hash_map <Key, V, SPARSEHASH_HASH<Key>, std::equal_to<Key>, ContainerAlloc<std::pair<Key, V> > > {};
+	//template<typename Key>
+	//class SparseHashSet : public google::sparse_hash_set<Key, SPARSEHASH_HASH<Key>, std::equal_to<Key>, ContainerAlloc<Key> > {};
+	//
+	//template<typename Key>
+	//class DenseHashSet : public google::dense_hash_set<Key, SPARSEHASH_HASH<Key>, std::equal_to<Key>, ContainerAlloc<Key> > {};
+	//
+	//template<typename Key, typename V>
+	//class SparseHashMap : public google::sparse_hash_map <Key, V, SPARSEHASH_HASH<Key>, std::equal_to<Key>, ContainerAlloc<std::pair<Key, V> > > {};
+	//
+	//template<typename Key, typename V>
+	//class DenseHashMap : public google::dense_hash_map <Key, V, SPARSEHASH_HASH<Key>, std::equal_to<Key>, ContainerAlloc<std::pair<Key, V> > > {};
 	
 	typedef std::basic_string<char, std::char_traits<char>, ContainerAlloc<char> >			String;
 	typedef std::basic_string<char, std::char_traits<char>, ContainerAlloc<wchar_t> >		WString;

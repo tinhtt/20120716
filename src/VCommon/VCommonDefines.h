@@ -26,7 +26,8 @@
 #include "boost/bind.hpp"
 #include "boost/thread.hpp"
 #include "boost/utility.hpp"
-#include "boost/basic_repeating_timer.hpp"
+#include "boost/function.hpp"
+#include "boost/make_shared.hpp"
 #include "boost/smart_ptr/scoped_ptr.hpp"
 #include "boost/smart_ptr/scoped_array.hpp"
 #include "boost/smart_ptr/shared_ptr.hpp"
@@ -48,6 +49,7 @@ typedef unsigned int					VUInt32;
 typedef bool							VBool;
 typedef float							VFloat32;
 typedef	double							VDouble64;
+typedef	unsigned short					VPacketType;
 
 typedef boost::posix_time::ptime 		VTime;
 typedef boost::asio::io_service			VBoostService;
@@ -58,7 +60,6 @@ typedef boost::asio::ip::tcp::endpoint  VEndPoint;
 typedef boost::asio::ip::tcp::socket	VTcpSocket;
 typedef boost::asio::ip::tcp::acceptor  VAcceptor;
 typedef boost::asio::deadline_timer		VDeadlineTimer;
-typedef boost::asio::repeating_timer	VRepeatingTimer;
 typedef boost::shared_mutex				VMutex;
 
 #define VTrue				1
@@ -168,17 +169,17 @@ class VSafeSet : boost::noncopyable, public VSet<T> {};
 template<typename T>
 class VSafeCircularBuffer : boost::noncopyable, public VCircularBuffer<T> {};
 
-template<typename Key>
-class VSafeSparseHashSet : boost::noncopyable, public vcommon::SparseHashSet<Key> {};
-
-template<typename Key>
-class VSafeDenseHashSet : boost::noncopyable, public vcommon::DenseHashSet<Key> {};
-
-template<typename Key, typename V>
-class VSafeSparseHashMap : boost::noncopyable, public vcommon::SparseHashMap<Key, V> {};
-
-template<typename Key, typename V>
-class VSafeDenseHashMap : boost::noncopyable, public vcommon::DenseHashMap<Key, V> {};
+//template<typename Key>
+//class VSafeSparseHashSet : boost::noncopyable, public vcommon::SparseHashSet<Key> {};
+//
+//template<typename Key>
+//class VSafeDenseHashSet : boost::noncopyable, public vcommon::DenseHashSet<Key> {};
+//
+//template<typename Key, typename V>
+//class VSafeSparseHashMap : boost::noncopyable, public vcommon::SparseHashMap<Key, V> {};
+//
+//template<typename Key, typename V>
+//class VSafeDenseHashMap : boost::noncopyable, public vcommon::DenseHashMap<Key, V> {};
 
 template<typename T, const size_t N>
 class VCircularStack
@@ -304,3 +305,5 @@ struct VSimpleBuffer
 		return data_ && len_;
 	}
 };
+
+typedef VSharedPtr<VSimpleBuffer> VSimpleBufferRef;

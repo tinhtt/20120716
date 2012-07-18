@@ -14,9 +14,9 @@ VNetworkProcessPacketManager::~VNetworkProcessPacketManager(void)
 {
 }
 
-VBool VNetworkProcessPacketManager::ReceivePacket(ConnectionPtr conn, UserPtr user,const HeaderPtr header,const ConstBuffer &buff)
+VBool VNetworkProcessPacketManager::ReceivePacket(ConnectionPtr conn, VUserPtr user,const HeaderPtr header,const ConstBuffer &buff)
 {		
-	MutableBuffer packet;
+	VMutableBuffer packet;
 	const ChatHeader *pHeader = (const ChatHeader *)header;
 	if( user )
 	{
@@ -31,9 +31,9 @@ VBool VNetworkProcessPacketManager::ReceivePacket(ConnectionPtr conn, UserPtr us
 	return OnReceive(conn, (vchat::VChatUserPtr )user, pHeader, packet, VTrue);
 }
 
-VBool VNetworkProcessPacketManager::ReceivePacket(ConnectionPtr conn, UserPtr user, const HeaderPtr header,const ConstBuffer &buff1,const ConstBuffer &buff2)
+VBool VNetworkProcessPacketManager::ReceivePacket(ConnectionPtr conn, VUserPtr user, const HeaderPtr header,const ConstBuffer &buff1,const ConstBuffer &buff2)
 {
-	MutableBuffer packet;
+	VMutableBuffer packet;
 	const ChatHeader *pHeader = (const ChatHeader *)header;
 	if( user )
 	{
@@ -52,7 +52,7 @@ VBool VNetworkProcessPacketManager::ReceivePacket(ConnectionPtr conn, UserPtr us
 	return OnReceive(conn, (vchat::VChatUserPtr )user, pHeader, packet, VFalse);
 }
 
-VBool VNetworkProcessPacketManager::OnReceive( SessionPtr pSession,vchat::VChatUserPtr pPlayer, const ChatHeader* pHeader, const MutableBuffer & buff, const VBool &bOwnMem)
+VBool VNetworkProcessPacketManager::OnReceive( SessionPtr pSession,vchat::VChatUserPtr pPlayer, const ChatHeader* pHeader, const VMutableBuffer & buff, const VBool &bOwnMem)
 {
 	if (pPlayer )
 	{

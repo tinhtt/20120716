@@ -10,7 +10,7 @@ public:
 	void Start() {}
 	void Stop() {}
 public:
-	VBool OnReceive(SessionPtr pSession, vchat::VChatUser* user, const ChatHeader* pHeader, const MutableBuffer &buff, const VBool &);
-	VBool ReceivePacket( SessionPtr, UserPtr, HeaderPtr, const ConstBuffer&);
-	VBool ReceivePacket( SessionPtr, UserPtr, HeaderPtr, const ConstBuffer&, const ConstBuffer&);
+	VBool OnReceive(SessionPtr pSession, vchat::VChatUser* user, const ChatHeader* pHeader, const VMutableBuffer &buff, const VBool &);
+	VBool ReceivePacket( SessionPtr, VUserPtr, HeaderPtr, const ConstBuffer&);
+	VBool ReceivePacket( SessionPtr, VUserPtr, HeaderPtr, const ConstBuffer&, const ConstBuffer&);
 };

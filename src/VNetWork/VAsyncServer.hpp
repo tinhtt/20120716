@@ -6,7 +6,7 @@ namespace boost
 	namespace asio
 	{
 #pragma pack(push, 1)
-		struct Header
+		struct header
 		{
 			boost::uint32_t nLen;
 			boost::uint32_t nCrc;

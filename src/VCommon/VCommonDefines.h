@@ -62,6 +62,9 @@ typedef boost::asio::ip::tcp::acceptor  VAcceptor;
 typedef boost::asio::deadline_timer		VDeadlineTimer;
 typedef boost::shared_mutex				VMutex;
 
+typedef std::pair<size_t, const char*>	VConstBuffer;
+typedef std::pair<size_t, char*>		VMutableBuffer;
+
 #define VTrue				1
 #define VFalse				0
 #define VNull				0

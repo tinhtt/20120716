@@ -76,7 +76,7 @@ namespace vchat
 				}
 				else
 				{
-					VBuffer bufferChat = CreateBufferChat(vchat::CHAT_NORMAL,usr->GetPlayerID());
+					VBuffer bufferChat = CreateBufferChat(vchat::kChatNormal,usr->GetPlayerID());
 					bufferChat.WriteBuffer(usr->GetUserName().c_str(),usr->GetUserName().size());
 					bufferChat.WriteObject(':');
 					bufferChat.WriteBuffer(packet, nSize);

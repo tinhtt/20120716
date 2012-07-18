@@ -7,18 +7,14 @@ namespace boost
 	{
 		class session;
 		class async_server;
-		struct Header;
+		struct header;
 
 		typedef session*					session_ptr;
 		typedef boost::shared_ptr<session>	session_ref;
 	};
 };
 
-typedef boost::asio::Header* VHeaderPtr;
-
-typedef std::pair<size_t, const char*>	VConstBuffer;
-typedef std::pair<size_t, char*>		VMutableBuffer;
-
+typedef boost::asio::header* VHeaderPtr;
 typedef VSharedPtr<boost::asio::async_server> VAsyncServerRef;
 
 typedef boost::asio::session*				VSessionPtr;

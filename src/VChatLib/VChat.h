@@ -1,21 +1,19 @@
 #pragma once
-#include "VCommonDefines.h"
+#include "../VCommon/VCommonDefines.h"
 #include "VChatPacket.h"
-#include "../VNetWork/VInternalPacket.h"
-#include "../VNetWork/VInternalNetwork.h"
+#include "VChatFwd.h"
 
 namespace vchat
 {
-	using namespace vcommon;	
-	enum
+	enum ERoomConstant
 	{
-		IsolationRoom = -1,
+		kIsolationRoom = -1,
 	};
 
-	enum CHAT_TYPE
+	enum EChatType
 	{
-		CHAT_NORMAL,
-		CHAT_SYSTEM_NOTIFY,
+		kChatNormal,
+		kChatSystemNotify
 	};
 };
 
